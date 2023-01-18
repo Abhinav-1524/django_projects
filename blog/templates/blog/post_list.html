@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>My_blog</title>
-    </head>
-    <body>
-        <QuerySet [<Post: My second post>, <Post: My first post>]>
-        <header>
-            <h1><a href="/">My_Blog</a></h1>
-        </header>
 
-        
+{% extends 'blog/base.html' %}
+
+
+    {% block content %}
         {% for post in posts %}
-        <article>
-            <time>published: {{ post.published_date }}</time>
-            <h2><a href="">{{ post.title }}</a></h2>
-            <p>{{ post.text|linebreaksbr }}</p>
-        </article>
-        {% endfor %}
+                <article class="post">
+                    <time class="date">
+                        {{ post.published_date }}
+                    </time>
+                    
+                    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
 
-    </body>
-</html>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                </article>
+        {% endfor %}
+    {% endblock %}        
+        
+
